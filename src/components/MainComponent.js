@@ -11,6 +11,7 @@ import {LEADERS} from '../shared/leaders';
 import {COMMENTS} from '../shared/comments';
 import Footer from './FooterComponent';
 import {Switch,Route,Redirect} from 'react-router-dom';
+import Todo from './TodoComponent';
 
 class Main extends Component {
 
@@ -63,6 +64,7 @@ class Main extends Component {
           <Route path="/menu/:dishId" component={dishWithId}/>
           <Route exact path="/aboutus" component={()=><About leaders={this.state.leaders}/>}/>
           <Route exact path="/contactus" component={Contact}/>
+          <Route exact path="/todo" component={Todo}/>
           <Redirect to="/home"/>
         </Switch>
         {/* <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)}/>
