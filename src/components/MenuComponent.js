@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 import { Card, CardImg, CardImgOverlay,  
     CardTitle,Breadcrumb,BreadcrumbItem } from 'reactstrap';
+import Loading from './LoadingComponent';
     
 
  const MenuItem =({dish})=>{
@@ -20,16 +21,25 @@ import { Card, CardImg, CardImgOverlay,
 
 
  const Menu=(props)=>{
-    const menu=props.dishes.map((dish)=>{
+  
+    const menu=props.dishes.dishes.map((dish)=>{
+     
         return(
             <div  className="col-12 col-md-5 m-1">
             <MenuItem dish={dish}  />
           </div>
 
         );
+       
 
     })
-
+    if(props.dishesLoading){
+        return <Loading />
+    }
+    else if(props.dishErr){
+        return <h4>{props.dishErr}</h4>
+    }
+    else{
     return(
      
  <div className="container">
@@ -45,12 +55,13 @@ import { Card, CardImg, CardImgOverlay,
 
             </div>
              <div className="row">
+             
                  {menu}
              </div>   
              </div>       
    
     );  
-     
+}
  }
   
 

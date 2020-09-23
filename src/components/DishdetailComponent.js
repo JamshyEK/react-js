@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import Loading from "./LoadingComponent";
 
 const RenderDish = ({ dish }) => {
   if (dish != null) {
@@ -63,7 +64,7 @@ const RenderComments = ({ comments, addComment, dishId }) => {
             <li>{c.comment}</li>
 
             <li>
-              --{c.author}, {monthNames[date.getMonth()]} {date.getDay()},{" "}
+              --{c.author}, {monthNames[date.getMonth()]} {date.getDate()}{" "}
               {date.getFullYear()}
             </li>
           </ul>
@@ -82,6 +83,13 @@ const RenderComments = ({ comments, addComment, dishId }) => {
 };
 
 const DishDetail = (props) => {
+  if(props.dishesLoading){
+    return <Loading/>
+  }
+  else if(props.dishErr){
+    return <h4>{props.dishErr}</h4>
+  }
+  else{
   return (
     <div className="container">
       <div className="row">
@@ -106,6 +114,7 @@ const DishDetail = (props) => {
       </div>
     </div>
   );
+  }
 };
 
 const required = (val) => val && val.length;
