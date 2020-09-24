@@ -9,7 +9,7 @@ import Footer from "./FooterComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Todo from "./TodoComponent";
-import { addComment, fetchDishes } from "../redux/ActionCreators";
+import { addComment, fetchDishes ,fetchComments,fetchPromos} from "../redux/ActionCreators";
 import {actions} from 'react-redux-form';
 
 const mapStateToProps = (state) => {
@@ -27,6 +27,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
+  fetchComments: () => {
+    dispatch(fetchComments());
+  },
+  fetchPromos: () => {
+    dispatch(fetchPromos());
+  },
   resetFeedbackForm:()=>{dispatch(actions.reset('feedback'))}
 });
 
@@ -37,6 +43,8 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchDishes();
+    this.props.fetchComments();
+    this.props.fetchPromos();
   }
 
   render() {
@@ -47,8 +55,10 @@ class Main extends Component {
           dishesLoading={this.props.dishes.loading}
           dishErr={this.props.dishes.dishErr}
           promotions={
-            this.props.promotions.filter((promotions) => promotions.featured)[0]
+            this.props.promotions.promotions.filter((promotions) => promotions.featured)[0]
           }
+          promoLoading={this.props.promotions.loading}
+          promoErr={this.props.promotions.promoErr}
           leaders={this.props.leaders.filter((leaders) => leaders.featured)[0]}
         />
       );
@@ -64,9 +74,10 @@ class Main extends Component {
           }
           dishesLoading={this.props.dishes.loading}
           dishErr={this.props.dishes.dishErr}
-          comments={this.props.comments.filter(
+          comments={this.props.comments.comments.filter(
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
+          commentsErr={this.props.comments.commentsErr}
           addComment={this.props.addComment}
         />
       );
