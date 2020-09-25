@@ -15,6 +15,7 @@ const RenderCard = ({ item, loading , errMsg}) => {
     return <Loading />;
   }
   else if (errMsg){
+    console.log(errMsg);
       return <h4>{errMsg}</h4>
   }
    else {
