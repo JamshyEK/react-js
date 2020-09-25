@@ -38,7 +38,7 @@ const RenderDish = ({ dish }) => {
   }
 };
 
-const RenderComments = ({ comments, addComment, dishId }) => {
+const RenderComments = ({ comments, postComment, dishId }) => {
   if (comments == null) {
     return <div></div>;
   } else {
@@ -77,7 +77,7 @@ const RenderComments = ({ comments, addComment, dishId }) => {
         <h4>Comments</h4>
 
         {comment}
-        <CommentForm dishId={dishId} addComment={addComment} />
+        <CommentForm dishId={dishId} postComment={postComment} />
       </div>
     );
   }
@@ -110,7 +110,7 @@ const DishDetail = (props) => {
           <RenderDish dish={props.dish} />
         </div>
         <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.dish.id} />
+          <RenderComments comments={props.comments} postComment={props.postComment} dishId={props.dish.id} />
         </div>
       </div>
     </div>
@@ -137,7 +137,7 @@ class CommentForm extends Component {
   };
 
   HandleSubmit = (values) => {
-    this.props.addComment(this.props.dishId,values.rating,values.yourname,values.comment);
+    this.props.postComment(this.props.dishId,values.rating,values.yourname,values.comment);
     // console.log("Current State is:" + JSON.stringify(values));
     // alert("Current State is:" + JSON.stringify(values));
     this.toggleModal();
