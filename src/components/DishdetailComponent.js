@@ -19,10 +19,12 @@ import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import Loading from "./LoadingComponent";
 import {baseUrl} from '../shared/baseUrl';
-
+import { FadeTransform, Fade, Stagger} from 'react-animation-components'
+ 
 const RenderDish = ({ dish }) => {
   if (dish != null) {
     return (
+      <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
       <Card>
         <CardImg top src={baseUrl+dish.image} alt={dish.name} />
         <CardBody>
@@ -32,6 +34,7 @@ const RenderDish = ({ dish }) => {
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
+      </FadeTransform>
     );
   } else {
     return <div></div>;
@@ -60,16 +63,20 @@ const RenderComments = ({ comments, postComment, dishId }) => {
       const date = new Date(Date.parse(c.date));
       console.log(date);
       return (
+        <Stagger in>
         <div>
           <ul class="list-unstyled">
+          <Fade in>
             <li>{c.comment}</li>
 
             <li>
               --{c.author}, {monthNames[date.getMonth()]} {date.getDate()}{" "}
               {date.getFullYear()}
             </li>
+            </Fade>
           </ul>
         </div>
+        </Stagger>
       );
     });
     return (
