@@ -21,6 +21,7 @@ export const Comments = (
       };
     case ActionTypes.ADD_COMMENT:
       var comment = actions.payload;
+
       console.log("comment:", comment);
       return { ...state, comments: state.comments.concat(comment) };
 

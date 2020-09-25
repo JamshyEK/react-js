@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import Todo from "./TodoComponent";
 import { postComment, fetchDishes ,fetchComments,fetchPromos} from "../redux/ActionCreators";
 import {actions} from 'react-redux-form';
+import {TransitionGroup,CSSTransition} from 'react-transition-group'
 
 const mapStateToProps = (state) => {
   return {
@@ -86,6 +87,8 @@ class Main extends Component {
     return (
       <div>
         <Header />
+        <TransitionGroup>
+        <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
         <Switch>
           <Route path="/home" component={HomeComponent} />
           <Route
@@ -109,6 +112,8 @@ class Main extends Component {
           <Route exact path="/todo" component={Todo} />
           <Redirect to="/home" />
         </Switch>
+        </CSSTransition>
+        </TransitionGroup>
         {/* <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)}/>
         <DishDetail dish={this.state.dishes.filter((dish)=>dish.id === this.state.selectedDish )[0]}/> */}
         <Footer />
